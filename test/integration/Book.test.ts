@@ -17,6 +17,15 @@ describe("Books", () => {
         expect(response.status).toEqual(400);
         expect(response.body).toEqual({ message: '"name" is required' });
       });
+
+      describe("quando registra um livro com sucesso", () => {
+        it("deve retornar um status 201 e o id do novo livro", async () => {
+          const response = await supertest(app).post("/books").send(newBook);
+
+          expect(response.status).toEqual(201);
+          expect(response.body).toEqual({ id: 5 });
+        });
+      });
     });
   });
 });
