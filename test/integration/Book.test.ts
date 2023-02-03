@@ -22,7 +22,7 @@ describe("Books", () => {
       it("deve retornar um status 201 e o id do novo livro", async () => {
         const response = await supertest(app).post("/books").send(newBook);
 
-        // expect(response.status).toEqual(201);
+        expect(response.status).toEqual(201);
         expect(response.body).toEqual({ id: 5 });
       });
     });

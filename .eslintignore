@@ -1,2 +1,6 @@
 src/database/migrations/*.ts
 src/database/seeders/*.ts
+build/**/*.js
+test
+coverage
+jest.config.js

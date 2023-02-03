@@ -8,7 +8,7 @@
     "predev": "npm run db:reset",
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "prepare": "husky install",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint . --ext .ts",
     "test": "jest",
     "db:drop": "npx sequelize db:drop",
     "db:create": "npx sequelize db:create",
