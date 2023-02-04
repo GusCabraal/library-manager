@@ -6,10 +6,10 @@ export class bookController {
   constructor(private bookService: BookService) {}
 
   public create = async (req: Request, res: Response) => {
-    const newBook = req.body;
+    const bookInput = req.body;
 
     return this.bookService
-      .create(newBook)
-      .then((bookId) => res.status(201).json({ id: bookId }));
+      .create(bookInput)
+      .then((newBook) => res.status(201).json(newBook));
   };
 }

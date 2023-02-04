@@ -23,11 +23,13 @@ describe("Books", () => {
         expect(response.body).toEqual({ message: '"name" is required' });
       });
     });
-    
+
     describe("quando registra um livro com sucesso", () => {
       it("deve retornar um status 201 e o id do novo livro", async () => {
         sinon.stub(Model, 'create').resolves(newBookDB as Book)
-        const response = await supertest(app).post("/books").send(newBookInput);
+        const response = await supertest(app)
+          .post("/books")
+          .send(newBookInput);
 
         expect(response.status).toEqual(201);
         expect(response.body).toEqual(newBookDB);

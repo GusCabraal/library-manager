@@ -1,15 +1,10 @@
-import { Book } from "../Contracts/Entities/Book";
+import { NewBookInput } from "../Contracts/Entities/Book";
 import { BookRepository } from "../Contracts/Repository/Book.Repository";
+import BookModel from "../database/models/Book";
 // import { ClientODM } from '../Models/ClientODM';
 
 export class bookRepository implements BookRepository {
-  //   private model: ClientODM;
-
-  //   constructor(model: ClientODM) {
-  //     this.model = model;
-  //   }
-
-  async create(data: Book): Promise<number> {
-    return Object.keys(data).length;
-  }
+  create = async (data: NewBookInput) => {
+    return BookModel.create(data, { raw: true });
+  };
 }

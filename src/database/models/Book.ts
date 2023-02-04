@@ -28,7 +28,6 @@ Book.init(
     name: {
       allowNull: false,
       type: DataTypes.STRING,
-      field: "display_name",
     },
     author: {
       allowNull: false,

@@ -1,5 +1,5 @@
-import { Book } from "../Entities/Book";
+import { NewBookInput, Book } from "../Entities/Book";
 
 export interface BookRepository {
-  create(data: Book): Promise<number>;
+  create(data: NewBookInput): Promise<Book>;
 }
