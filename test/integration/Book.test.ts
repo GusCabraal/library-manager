@@ -75,4 +75,31 @@ describe("Books", () => {
       });
     });
   });
+
+  describe("Removendo um livro do banco de dados", () => {
+    afterEach(() => sinon.restore())
+
+    describe("Quando remove um livro com sucesso", () => {
+      it("Deve retornar status 204", async () => {
+        sinon.stub(Model, 'destroy').resolves(1)
+
+        const response = await supertest(app)
+          .delete("/books/1")
+
+        expect(response.status).toEqual(204);
+      });
+    });
+
+    describe("Quando tenta remover um livro inexistente no banco de dados", () => {
+      it("Deve retornar um status 404 e uma mensagem de erro", async () => {
+        sinon.stub(Model, 'destroy').resolves(0)
+        const NOT_FOUND_ID = 1000
+        const response = await supertest(app)
+          .delete(`/books/${NOT_FOUND_ID}`)
+
+        expect(response.status).toEqual(404);
+        expect(response.body).toEqual({ message: 'Book not found' });
+      });
+    });
+  });
 });
