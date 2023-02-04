@@ -44,33 +44,34 @@ describe("Books", () => {
       it("Deve retornar um status 200 e uma lista de livros", async () => {
         sinon.stub(Model, 'findAll').resolves(books as Book[])
 
-        const response = await supertest(app).get("/books")
+        const response = await supertest(app)
+          .get("/books")
 
         expect(response.status).toEqual(200);
         expect(response.body).toEqual(books);
       });
     });
 
-    // describe("Quando busca pelo id um livro existente no banco de dados", () => {
-    //   it("deve retornar um status 200 e o livro solicitado", async () => {
-    //     sinon.stub(Model, 'findByPk').resolves(book as Book)
-    //     const response = await supertest(app)
-    //       .get("/books/2")
+    describe("Quando busca pelo id um livro existente no banco de dados", () => {
+      it("Deve retornar um status 200 e o livro solicitado", async () => {
+        sinon.stub(Model, 'findByPk').resolves(book as Book)
+        const response = await supertest(app)
+          .get("/books/2")
 
-    //     expect(response.status).toEqual(200);
-    //     expect(response.body).toEqual(book);
-    //   });
-    // });
+        expect(response.status).toEqual(200);
+        expect(response.body).toEqual(book);
+      });
+    });
 
-    // describe("Quando busca pelo id um livro inexistente no banco de dados", () => {
-    //   it("deve retornar um status 404 e uma mensagem de erro", async () => {
-    //     sinon.stub(Model, 'findByPk').resolves(null)
-    //     const response = await supertest(app)
-    //       .get("/books/1000")
+    describe("Quando busca pelo id um livro inexistente no banco de dados", () => {
+      it("deve retornar um status 404 e uma mensagem de erro", async () => {
+        sinon.stub(Model, 'findByPk').resolves(null)
+        const response = await supertest(app)
+          .get("/books/1000")
 
-    //     expect(response.status).toEqual(404);
-    //     expect(response.body).toEqual({ message: 'Book not found' });
-    //   });
-    // });
+        expect(response.status).toEqual(404);
+        expect(response.body).toEqual({ message: 'Book not found' });
+      });
+    });
   });
 });
