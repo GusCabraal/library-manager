@@ -11,7 +11,7 @@ describe("Books", () => {
   describe("Adicionando um livro no banco de dados", () => {
     afterEach(() => sinon.restore())
 
-    describe("Quando passa um parametro invalido", () => {
+    describe("Quando passa um parâmetro inválido", () => {
       it("Deve retornar um status 400 e uma mensagem de erro", async () => {
         const { name, ...bookWithoutName } = newBookInput;
 

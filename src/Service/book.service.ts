@@ -3,6 +3,8 @@ import { BookRepository } from "../Contracts/Repository/Book.Repository";
 import { BookService } from "../Contracts/Service/Book.Service";
 import { NotFoundError } from "../utils/errors/NotFoundError";
 
+const BOOK_NOT_FOUND = "Book not found";
+
 export class bookService implements BookService {
   constructor(private bookRepository: BookRepository) {}
 
@@ -18,15 +20,22 @@ export class bookService implements BookService {
     const book = await this.bookRepository.getById(id);
 
     if (!book) {
-      throw new NotFoundError("Book not found");
+      throw new NotFoundError(BOOK_NOT_FOUND);
     }
     return book;
+  }
+
+  async updateById(id: string, data: Partial<Book>): Promise<void> {
+    const [hasBookUpdated] = await this.bookRepository.updateById(id, data);
+    if (!hasBookUpdated) {
+      throw new NotFoundError(BOOK_NOT_FOUND);
+    }
   }
 
   async deleteById(id: string): Promise<void> {
     const hasBookDeleted = await this.bookRepository.deleteById(id);
     if (!hasBookDeleted) {
-      throw new NotFoundError("Book not found");
+      throw new NotFoundError(BOOK_NOT_FOUND);
     }
   }
 }

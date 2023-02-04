@@ -13,7 +13,7 @@ export class bookController {
       .then((newBook) => res.status(201).json(newBook));
   };
 
-  public getAll = async (req: Request, res: Response) => {
+  public getAll = async (_req: Request, res: Response) => {
     return this.bookService
       .getAll()
       .then((books) => res.status(200).json(books));
@@ -24,6 +24,16 @@ export class bookController {
     return this.bookService
       .getById(id)
       .then((book) => res.status(200).json(book));
+  };
+
+  public updateById = async (req: Request, res: Response) => {
+    const {
+      params: { id },
+      body,
+    } = req;
+    return this.bookService
+      .updateById(id, body)
+      .then(() => res.sendStatus(204));
   };
 
   public deleteById = async (req: Request, res: Response) => {
