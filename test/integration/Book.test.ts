@@ -5,7 +5,7 @@ import { Model } from 'sequelize';
 import Book from '../../src/database/models/Book';
 
 import { app } from "../../src/app";
-import { book, books, newBookDB, newBookInput } from "./mocks/books.mock";
+import { book, books, invalidUpdate, newBookDB, newBookInput, validBookUpdate } from "./mocks/books.mock";
 
 describe("Books", () => {
   describe("Adicionando um livro no banco de dados", () => {
@@ -69,6 +69,49 @@ describe("Books", () => {
         const NOT_FOUND_ID = 1000
         const response = await supertest(app)
           .get(`/books/${NOT_FOUND_ID}`)
+
+        expect(response.status).toEqual(404);
+        expect(response.body).toEqual({ message: 'Book not found' });
+      });
+    });
+  });
+
+  describe("Editando um livro no banco de dados", () => {
+    afterEach(() => sinon.restore())
+
+    describe("Quando edita um livro com sucesso", () => {
+      it("Deve retornar status 204", async () => {
+        sinon.stub(Model, 'update').resolves([1])
+
+        const response = await supertest(app)
+          .put("/books/1")
+          .send(validBookUpdate)
+
+        expect(response.status).toEqual(204);
+      });
+    });
+    
+    describe("Quando tenta editar um livro com dados invalidos", () => {
+      it("Deve retornar um status 400 e uma mensagem de erro", async () => {
+        sinon.stub(Model, 'update').resolves([0])
+        
+        const response = await supertest(app)
+        .put(`/books/1`)
+        .send(invalidUpdate)
+        
+        expect(response.status).toEqual(400);
+        expect(response.body).toEqual({ message: "\"releaseYear\" must be a number" });
+      });
+    });
+
+    describe("Quando tenta editar um livro inexistente no banco de dados", () => {
+      it("Deve retornar um status 404 e uma mensagem de erro", async () => {
+        const NOT_FOUND_ID = 1000
+        sinon.stub(Model, 'update').resolves([0])
+        
+        const response = await supertest(app)
+          .put(`/books/${NOT_FOUND_ID}`)
+          .send(validBookUpdate)
 
         expect(response.status).toEqual(404);
         expect(response.body).toEqual({ message: 'Book not found' });
