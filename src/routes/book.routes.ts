@@ -13,3 +13,4 @@ export const bookRoutes = Router();
 
 bookRoutes.post("/", validateNewBook, controller.create);
 bookRoutes.get("/", controller.getAll);
+bookRoutes.get("/:id", controller.getById);

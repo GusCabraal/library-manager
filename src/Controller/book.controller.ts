@@ -18,4 +18,11 @@ export class bookController {
       .getAll()
       .then((books) => res.status(200).json(books));
   };
+
+  public getById = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    return this.bookService
+      .getById(id)
+      .then((book) => res.status(200).json(book));
+  };
 }

@@ -11,4 +11,8 @@ export class bookRepository implements BookRepository {
   getAll = async () => {
     return BookModel.findAll({ raw: true });
   };
+
+  getById = async (id: string) => {
+    return BookModel.findByPk(id, { raw: true });
+  };
 }

@@ -8,11 +8,11 @@ import { app } from "../../src/app";
 import { book, books, newBookDB, newBookInput } from "./mocks/books.mock";
 
 describe("Books", () => {
-  describe("adicionando um livro no banco de dados", () => {
+  describe("Adicionando um livro no banco de dados", () => {
     afterEach(() => sinon.restore())
 
-    describe("quando passa um parametro invalido", () => {
-      it("deve retornar um status 400 e uma mensagem de erro", async () => {
+    describe("Quando passa um parametro invalido", () => {
+      it("Deve retornar um status 400 e uma mensagem de erro", async () => {
         const { name, ...bookWithoutName } = newBookInput;
 
         const response = await supertest(app)
@@ -24,8 +24,8 @@ describe("Books", () => {
       });
     });
 
-    describe("quando registra um livro com sucesso", () => {
-      it("deve retornar um status 201 e o id do novo livro", async () => {
+    describe("Quando registra um livro com sucesso", () => {
+      it("Deve retornar um status 201 e o id do novo livro", async () => {
         sinon.stub(Model, 'create').resolves(newBookDB as Book)
         const response = await supertest(app)
           .post("/books")
@@ -37,7 +37,7 @@ describe("Books", () => {
     });
   });
 
-  describe("fazendo uma busca no banco de dados", () => {
+  describe("Fazendo uma busca no banco de dados", () => {
     afterEach(() => sinon.restore())
 
     describe("Quando busca todos os livros", () => {
@@ -64,10 +64,11 @@ describe("Books", () => {
     });
 
     describe("Quando busca pelo id um livro inexistente no banco de dados", () => {
-      it("deve retornar um status 404 e uma mensagem de erro", async () => {
+      it("Deve retornar um status 404 e uma mensagem de erro", async () => {
         sinon.stub(Model, 'findByPk').resolves(null)
+        const NOT_FOUND_ID = 1000
         const response = await supertest(app)
-          .get("/books/1000")
+          .get(`/books/${NOT_FOUND_ID}`)
 
         expect(response.status).toEqual(404);
         expect(response.body).toEqual({ message: 'Book not found' });
