@@ -5,7 +5,7 @@ import { Model } from 'sequelize';
 import Book from '../../src/database/models/Book';
 
 import { app } from "../../src/app";
-import { newBookDB, newBookInput } from "./mocks/books.mock";
+import { book, books, newBookDB, newBookInput } from "./mocks/books.mock";
 
 describe("Books", () => {
   describe("adicionando um livro no banco de dados", () => {
@@ -35,5 +35,43 @@ describe("Books", () => {
         expect(response.body).toEqual(newBookDB);
       });
     });
+  });
+
+  describe("fazendo uma busca no banco de dados", () => {
+    afterEach(() => sinon.restore())
+
+    describe("Quando busca todos os livros", () => {
+      it("Deve retornar um status 200 e uma lista de livros", async () => {
+        sinon.stub(Model, 'findAll').resolves(books as Book[])
+
+        const response = await supertest(app)
+          .get("/books")
+
+        expect(response.status).toEqual(200);
+        expect(response.body).toEqual(books);
+      });
+    });
+
+    // describe("Quando busca pelo id um livro existente no banco de dados", () => {
+    //   it("deve retornar um status 200 e o livro solicitado", async () => {
+    //     sinon.stub(Model, 'findByPk').resolves(book as Book)
+    //     const response = await supertest(app)
+    //       .get("/books/2")
+
+    //     expect(response.status).toEqual(200);
+    //     expect(response.body).toEqual(book);
+    //   });
+    // });
+
+    // describe("Quando busca pelo id um livro inexistente no banco de dados", () => {
+    //   it("deve retornar um status 404 e uma mensagem de erro", async () => {
+    //     sinon.stub(Model, 'findByPk').resolves(null)
+    //     const response = await supertest(app)
+    //       .get("/books/1000")
+
+    //     expect(response.status).toEqual(404);
+    //     expect(response.body).toEqual({ message: 'Book not found' });
+    //   });
+    // });
   });
 });
