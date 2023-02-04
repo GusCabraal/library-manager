@@ -4,4 +4,5 @@ export interface BookRepository {
   create(data: NewBookInput): Promise<Book>;
   getAll(): Promise<Book[]>;
   getById(id: string): Promise<Book | null>;
+  deleteById(id: string): Promise<number>;
 }

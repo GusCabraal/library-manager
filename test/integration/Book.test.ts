@@ -92,8 +92,9 @@ describe("Books", () => {
 
     describe("Quando tenta remover um livro inexistente no banco de dados", () => {
       it("Deve retornar um status 404 e uma mensagem de erro", async () => {
-        sinon.stub(Model, 'destroy').resolves(0)
         const NOT_FOUND_ID = 1000
+        sinon.stub(Model, 'destroy').resolves(0)
+        
         const response = await supertest(app)
           .delete(`/books/${NOT_FOUND_ID}`)
 

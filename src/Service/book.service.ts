@@ -20,7 +20,13 @@ export class bookService implements BookService {
     if (!book) {
       throw new NotFoundError("Book not found");
     }
-
     return book;
+  }
+
+  async deleteById(id: string): Promise<void> {
+    const hasBookDeleted = await this.bookRepository.deleteById(id);
+    if (!hasBookDeleted) {
+      throw new NotFoundError("Book not found");
+    }
   }
 }

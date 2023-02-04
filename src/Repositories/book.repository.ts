@@ -15,4 +15,8 @@ export class bookRepository implements BookRepository {
   getById = async (id: string) => {
     return BookModel.findByPk(id, { raw: true });
   };
+
+  deleteById = async (id: string) => {
+    return BookModel.destroy({ where: { id } });
+  };
 }

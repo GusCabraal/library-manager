@@ -25,4 +25,9 @@ export class bookController {
       .getById(id)
       .then((book) => res.status(200).json(book));
   };
+
+  public deleteById = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    return this.bookService.deleteById(id).then(() => res.sendStatus(204));
+  };
 }

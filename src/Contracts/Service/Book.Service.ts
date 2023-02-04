@@ -4,4 +4,5 @@ export interface BookService {
   create(data: NewBookInput): Promise<Book>;
   getAll(): Promise<Book[]>;
   getById(id: string): Promise<Book | void>;
+  deleteById(id: string): Promise<void>;
 }
