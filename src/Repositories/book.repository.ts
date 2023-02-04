@@ -7,4 +7,8 @@ export class bookRepository implements BookRepository {
   create = async (data: NewBookInput) => {
     return BookModel.create(data, { raw: true });
   };
+
+  getAll = async () => {
+    return BookModel.findAll({ raw: true });
+  };
 }

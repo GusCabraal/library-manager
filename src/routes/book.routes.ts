@@ -12,3 +12,4 @@ const controller = new bookController(service);
 export const bookRoutes = Router();
 
 bookRoutes.post("/", validateNewBook, controller.create);
+bookRoutes.get("/", controller.getAll);

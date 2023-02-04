@@ -12,4 +12,10 @@ export class bookController {
       .create(bookInput)
       .then((newBook) => res.status(201).json(newBook));
   };
+
+  public getAll = async (req: Request, res: Response) => {
+    return this.bookService
+      .getAll()
+      .then((books) => res.status(200).json(books));
+  };
 }

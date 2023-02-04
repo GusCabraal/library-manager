@@ -44,8 +44,7 @@ describe("Books", () => {
       it("Deve retornar um status 200 e uma lista de livros", async () => {
         sinon.stub(Model, 'findAll').resolves(books as Book[])
 
-        const response = await supertest(app)
-          .get("/books")
+        const response = await supertest(app).get("/books")
 
         expect(response.status).toEqual(200);
         expect(response.body).toEqual(books);

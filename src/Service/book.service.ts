@@ -8,4 +8,8 @@ export class bookService implements BookService {
   create(data: NewBookInput): Promise<Book> {
     return this.bookRepository.create(data);
   }
+
+  getAll(): Promise<Book[]> {
+    return this.bookRepository.getAll();
+  }
 }
