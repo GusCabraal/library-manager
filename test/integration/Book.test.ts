@@ -66,7 +66,7 @@ describe("Books", () => {
       });
     });
 
-    describe("Quando busca pelo id um livro existente no banco de dados", () => {
+    describe("Quando busca pelo id de um livro existente no banco de dados", () => {
       it("Deve retornar um status 200 e o livro solicitado", async () => {
         sinon.stub(Model, 'findByPk').resolves(book as Book)
         const response = await supertest(app)
