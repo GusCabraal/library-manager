@@ -10,11 +10,11 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3001",
+      "url": "http://localhost:3001/api-docs",
       "description": "API de test"
     },
     {
-      "url": "http://localhost:3001",
+      "url": "https://library-manager-production.up.railway.app/api-docs",
       "description": "API de produção"
     }
   ],
