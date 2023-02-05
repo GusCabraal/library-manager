@@ -10,7 +10,32 @@ import { book, books, invalidUpdate, newBookDB, newBookInput, validBookUpdate } 
 describe("Books", () => {
   describe("Adicionando um livro no banco de dados", () => {
     afterEach(() => sinon.restore())
+    
+    describe("Quando registra um livro com sucesso", () => {
+      it("Deve retornar um status 201 e o id do novo livro", async () => {
+        sinon.stub(Model, 'findOne').resolves(null)
+        sinon.stub(Model, 'create').resolves(newBookDB as Book)
+        const response = await supertest(app)
+          .post("/books")
+          .send(newBookInput);
 
+        expect(response.status).toEqual(201);
+        expect(response.body).toEqual(newBookDB);
+      });
+    });
+
+    describe("Quando tento cadastrar um livro ja existendo no DB", () => {
+      it("Deve retornar um status 409 e uma mensagem de erro", async () => {
+        sinon.stub(Model, 'findOne').resolves(newBookDB as Book)
+        const response = await supertest(app)
+          .post("/books")
+          .send(newBookInput);
+
+        expect(response.status).toEqual(409);
+        expect(response.body).toEqual({ message: "Book already exists" });
+      });
+    });
+    
     describe("Quando passa um parâmetro inválido", () => {
       it("Deve retornar um status 400 e uma mensagem de erro", async () => {
         const { name, ...bookWithoutName } = newBookInput;
@@ -24,17 +49,6 @@ describe("Books", () => {
       });
     });
 
-    describe("Quando registra um livro com sucesso", () => {
-      it("Deve retornar um status 201 e o id do novo livro", async () => {
-        sinon.stub(Model, 'create').resolves(newBookDB as Book)
-        const response = await supertest(app)
-          .post("/books")
-          .send(newBookInput);
-
-        expect(response.status).toEqual(201);
-        expect(response.body).toEqual(newBookDB);
-      });
-    });
   });
 
   describe("Fazendo uma busca no banco de dados", () => {

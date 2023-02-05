@@ -16,6 +16,10 @@ export class bookRepository implements BookRepository {
     return BookModel.findByPk(id, { raw: true });
   };
 
+  getByName = async (name: string) => {
+    return BookModel.findOne({ where: { name }, raw: true });
+  };
+
   updateById = async (id: string, data: Partial<Book>) => {
     return BookModel.update(data, { where: { id } });
   };

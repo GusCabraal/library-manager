@@ -11,6 +11,14 @@ export default {
         releaseYear: 1899,
         numberOfPages: 210,
       },
+      {
+        id: 2,
+        name: "Dom Quixote de la Mancha",
+        author: "Miguel de Cervantes",
+        publishing: "Francisco de Robles",
+        releaseYear: 1605,
+        numberOfPages: 1033,
+      }
     ]);
   },
 

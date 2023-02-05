@@ -1,6 +1,7 @@
 import { Book, NewBookInput } from "../Contracts/Entities/Book";
 import { BookRepository } from "../Contracts/Repository/Book.Repository";
 import { BookService } from "../Contracts/Service/Book.Service";
+import { ConflictError } from "../utils/errors/ConflitError";
 import { NotFoundError } from "../utils/errors/NotFoundError";
 
 const BOOK_NOT_FOUND = "Book not found";
@@ -8,7 +9,13 @@ const BOOK_NOT_FOUND = "Book not found";
 export class bookService implements BookService {
   constructor(private bookRepository: BookRepository) {}
 
-  create(data: NewBookInput): Promise<Book> {
+  async create(data: NewBookInput): Promise<Book | void> {
+    const hasTheBookInDB = await this.bookRepository.getByName(data.name);
+
+    if (hasTheBookInDB) {
+      throw new ConflictError("Book already exists");
+    }
+
     return this.bookRepository.create(data);
   }
 
