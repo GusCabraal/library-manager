@@ -15,7 +15,7 @@ Nesse projeto foi desenvolvido uma API RESTful para gerenciamento de livros. Aqu
 
 ## Documentação
 
-Foi realizada a documentação da API utilizando o [swagger](https://swagger.io/), a documentação pode ser acessada no [link]().
+Foi realizada a documentação da API utilizando o [swagger](https://swagger.io/), a documentação pode ser acessada no [link](https://library-manager-production.up.railway.app/api-docs).
 
 
 ## Testes
