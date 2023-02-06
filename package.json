@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/server.ts",
+    "prestart": "chown -R root /app",
+    "start": "npm run db:reset && ts-node src/server.ts",
     "predev": "npm run db:reset",
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "prepare": "husky install",

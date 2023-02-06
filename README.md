@@ -27,6 +27,14 @@ npm install
 ```
 docker-compose up -d
 ```
+- Entre no container node
+```
+docker exec -it books_api bash
+```
+- Rode a API
+```
+npm start
+```
 - Acesse a API no localmente no endereço 
 ```
 http://localhost:3001
