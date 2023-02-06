@@ -3,4 +3,3 @@ coverage
 
 .env
 build
-docker-compose.yml
