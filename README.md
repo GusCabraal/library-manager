@@ -18,6 +18,10 @@ Nesse projeto foi desenvolvido uma API RESTful para gerenciamento de livros. Aqu
 ```
 git@github.com:GusCabraal/library-manager.git
 ```
+- Entre no projeto
+```
+cd library-manager
+```
 - Instale as dependencias 
 ```
 npm install
@@ -35,7 +39,7 @@ docker exec -it books_api bash
 ```
 npm start
 ```
-*Caso tenha algum problema de permissão negada com o comando acima, rode `chown -R root /app` e dê um novo `npm start`
+* Caso tenha algum problema de permissão negada com o comando acima, rode `chown -R root /app` e dê um novo `npm start`
 - Acesse a API no localmente no endereço 
 ```
 http://localhost:3001
@@ -44,7 +48,7 @@ http://localhost:3001
 
 ## Documentação
 
-Foi realizada a documentação da API utilizando o [swagger](https://swagger.io/), a documentação pode ser acessada no [link](https://library-manager-production.up.railway.app/api-docs).
+Foi realizada a documentação da API utilizando o [swagger](https://swagger.io/), a documentação pode ser acessada [aqui](https://library-manager-production.up.railway.app/api-docs).
 
 
 ## Testes
