@@ -12,6 +12,14 @@ Nesse projeto foi desenvolvido uma API RESTful para gerenciamento de livros. Aqu
 - Atualizar informações de um livro pelo ID;
 - Deletar um livro pelo ID;
 
+## Estrutura do projeto
+
+Foi desenvolvido uma aplicação em 4 camadas:
+- Controller: Camada com acesso direto ao express (Request, Response);
+- Service: Toda a parte de regras de negocio;
+- Repository: Tem contato direto com o ORM e respeita uma interface (contrato) pra facilitar uma eventual substituição, utilizei sequelize.js, mas assim fica facil a substituição dele por Prisma ou TypeORM caso seja necessário;
+- Model/Database: Configuração do ORM (conexão e criação de banco de dados);
+
 ## Como rodar
 
 - Clone o repositório 
@@ -27,7 +35,7 @@ cd library-manager
 npm install
 ```
 - Configure as variaveis de ambiente presentes no arquivo `.env.example`
-- Rode o docker-compose
+- Rode os serviços `books_api` e `books_api_db`
 ```
 docker-compose up -d
 ```
