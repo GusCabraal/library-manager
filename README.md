@@ -35,6 +35,7 @@ docker exec -it books_api bash
 ```
 npm start
 ```
+*Caso tenha algum problema de permissão negada com o comando acima, rode `chown -R root /app` e dê um novo `npm start`
 - Acesse a API no localmente no endereço 
 ```
 http://localhost:3001
