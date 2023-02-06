@@ -12,6 +12,26 @@ Nesse projeto foi desenvolvido uma API RESTful para gerenciamento de livros. Aqu
 - Atualizar informações de um livro pelo ID;
 - Deletar um livro pelo ID;
 
+## Como rodar
+
+- Clone o repositório 
+```
+git@github.com:GusCabraal/library-manager.git
+```
+- Instale as dependencias 
+```
+npm install
+```
+- Configure as variaveis de ambiente presentes no arquivo `.env.example`
+- Rode o docker-compose
+```
+docker-compose up -d
+```
+- Acesse a API no localmente no endereço 
+```
+http://localhost:3001
+```
+- Você pode consumir a API importando o arquivo `routes-project.json` para dentro do Insominia
 
 ## Documentação
 
